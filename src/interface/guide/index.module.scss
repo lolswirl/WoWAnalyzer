@@ -24,7 +24,7 @@
   padding: 0 design.$gaps_large 0 design.$gaps_large;
 
   &:global(.expanded) {
-    padding-bottom: design.$gaps_small;
+    padding-bottom: design.$gaps_large;
   }
 
   & :global(.details) > div {
@@ -44,10 +44,6 @@
   /* including .guide-container here is a specificity hack */
   :global(.guide-container) &:not(:first-child) {
     margin-top: design.$gaps_large;
-  }
-
-  &:last-child {
-    margin-bottom: design.$gaps_large;
   }
 
   & > header {
