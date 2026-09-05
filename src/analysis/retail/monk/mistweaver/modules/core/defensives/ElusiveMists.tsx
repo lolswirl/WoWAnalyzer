@@ -6,10 +6,8 @@ import {
   buff,
   MajorDefensiveBuff,
 } from 'interface/guide/components/MajorDefensives/MajorDefensiveAnalyzer';
-import MajorDefensiveStatistic from 'interface/MajorDefensiveStatistic';
 import { Options, SELECTED_PLAYER } from 'parser/core/Analyzer';
 import Events, { DamageEvent } from 'parser/core/Events';
-import STATISTIC_CATEGORY from 'parser/ui/STATISTIC_CATEGORY';
 import { ReactNode } from 'react';
 import { ELUSIVE_MISTS_DR } from '../../../constants';
 
@@ -49,10 +47,6 @@ class ElusiveMists extends MajorDefensiveBuff {
         counted here.
       </p>
     );
-  }
-
-  statistic(): ReactNode {
-    return <MajorDefensiveStatistic analyzer={this} category={STATISTIC_CATEGORY.TALENTS} />;
   }
 }
 
