@@ -110,7 +110,7 @@ class FortifyingBrew extends MajorDefensiveBuff {
   }
 
   statistic(): ReactNode {
-    return <MajorDefensiveStatistic analyzer={this} category={STATISTIC_CATEGORY.TALENTS} />;
+    return <MajorDefensiveStatistic analyzer={this} category={STATISTIC_CATEGORY.GENERAL} />;
   }
 }
 
