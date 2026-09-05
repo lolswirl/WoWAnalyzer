@@ -44,8 +44,6 @@ export default function Guide({ modules, events, info }: GuideProps<typeof Comba
         <RemGraphSubsection modules={modules} events={events} info={info} />
       </Section>
 
-      <ActiveTimeGuide />
-
       <Section title="Healing Cooldowns">
         <CooldownGraphSubsection modules={modules} events={events} info={info} />
         {info.combatant.hasTalent(TALENTS_MONK.INVOKE_CHI_JI_THE_RED_CRANE_TALENT)
@@ -78,6 +76,8 @@ export default function Guide({ modules, events, info }: GuideProps<typeof Comba
           />
         </SubSection>
       </Section>
+
+      <ActiveTimeGuide />
 
       <Section title="Other cooldowns, buffs, and procs">
         {info.combatant.hasTalent(TALENTS_MONK.LIFE_COCOON_TALENT) &&
