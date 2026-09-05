@@ -75,9 +75,9 @@ export default function Guide({ modules, events, info }: GuideProps<typeof Comba
             violationExplainers={explainers}
           />
         </SubSection>
+        <hr />
+        <ActiveTimeGuide />
       </Section>
-
-      <ActiveTimeGuide />
 
       <Section title="Other cooldowns, buffs, and procs">
         {info.combatant.hasTalent(TALENTS_MONK.LIFE_COCOON_TALENT) &&
