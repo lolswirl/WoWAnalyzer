@@ -33,6 +33,8 @@ import MorningBreeze from '../spells/MorningBreeze';
 import Mistline from '../spells/Mistline';
 import VitalExpenditure from '../spells/VitalExpenditure';
 import DanceOfChiJi from '../spells/DanceOfChiJi';
+import MeditativeFocus from '../heroTalents/MeditativeFocus';
+import YulonsKnowledge from '../heroTalents/YulonsKnowledge';
 
 class TalentHealingStatistic extends Analyzer {
   static dependencies = {
@@ -65,6 +67,8 @@ class TalentHealingStatistic extends Analyzer {
     mistline: Mistline,
     vitalExpenditure: VitalExpenditure,
     danceOfChiJi: DanceOfChiJi,
+    meditativeFocus: MeditativeFocus,
+    yulonsKnowledge: YulonsKnowledge,
   };
 
   protected risingMist!: RisingMist;
@@ -97,6 +101,8 @@ class TalentHealingStatistic extends Analyzer {
   protected mistline!: Mistline;
   protected vitalExpenditure!: VitalExpenditure;
   protected danceOfChiJi!: DanceOfChiJi;
+  protected meditativeFocus!: MeditativeFocus;
+  protected yulonsKnowledge!: YulonsKnowledge;
 
   buildTalentList() {
     const talentList = [];
@@ -189,6 +195,12 @@ class TalentHealingStatistic extends Analyzer {
     }
     if (this.selectedCombatant.hasTalent(TALENTS_MONK.DANCE_OF_CHI_JI_MISTWEAVER_TALENT)) {
       talentList.push(this.danceOfChiJi.subStatistic());
+    }
+    if (this.selectedCombatant.hasTalent(TALENTS_MONK.MEDITATIVE_FOCUS_TALENT)) {
+      talentList.push(this.meditativeFocus.subStatistic());
+    }
+    if (this.selectedCombatant.hasTalent(TALENTS_MONK.YULONS_KNOWLEDGE_TALENT)) {
+      talentList.push(this.yulonsKnowledge.subStatistic());
     }
 
     const sortedTalentList = talentList.sort(

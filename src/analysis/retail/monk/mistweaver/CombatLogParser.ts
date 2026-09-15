@@ -81,6 +81,8 @@ import CelestialConduit from '../shared/hero/ConduitOfTheCelestials/talents/Cele
 import StrengthOfTheBlackOx from './modules/heroTalents/StrengthOfTheBlackOx';
 import Coalesence from '../shared/hero/MasterOfHarmony/talents/Coalesence';
 import AspectOfHarmony from './modules/heroTalents/AspectOfHarmony';
+import MeditativeFocus from './modules/heroTalents/MeditativeFocus';
+import YulonsKnowledge from './modules/heroTalents/YulonsKnowledge';
 import RushingWindKick from './modules/spells/RushingWindKick';
 import JadeEmpowerment from './modules/spells/JadeEmpowerment';
 import MistyCoalescence from './modules/spells/MistyCoalescence';
@@ -234,6 +236,8 @@ class CombatLogParser extends CoreCombatLogParser {
     // Hero Talents
     strengthOfTheBlackOx: StrengthOfTheBlackOx,
     aspectOfHarmony: AspectOfHarmony,
+    meditativeFocus: MeditativeFocus,
+    yulonsKnowledge: YulonsKnowledge,
 
     // Defensives
     fortifyingBrew: FortifyingBrew,
