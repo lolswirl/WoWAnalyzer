@@ -8,6 +8,7 @@ import SpellLink from 'interface/SpellLink';
 
 // prettier-ignore
 export default [
+  change(date(2026, 9, 15), <>Added <SpellLink spell={TALENTS_MONK.MEDITATIVE_FOCUS_TALENT}/> and <SpellLink spell={TALENTS_MONK.YULONS_KNOWLEDGE_TALENT}/> modules.</>, swirl),
   change(date(2026, 9, 9), <>Fixed <SpellLink spell={TALENTS_MONK.VITAL_EXPENDITURE_TALENT}/> not increasing the mana cost of <SpellLink spell={TALENTS_MONK.SOOTHING_MIST_TALENT}/>.</>, swirl),
   change(date(2026, 9, 9), <>Added <SpellLink spell={SPELLS.ANCIENT_TEACHINGS} /> module for non-<SpellLink spell={TALENTS_MONK.JADEFIRE_TEACHINGS_TALENT}/> users.</>, swirl),
   change(date(2026, 9, 9), <>Cleaned up cast efficiencies from replaced/removed spells.</>, swirl),
