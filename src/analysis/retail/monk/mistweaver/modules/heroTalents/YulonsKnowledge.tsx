@@ -1,5 +1,4 @@
 import { TALENTS_MONK } from 'common/TALENTS';
-import { SpellLink } from 'interface';
 import Analyzer, { Options, SELECTED_PLAYER } from 'parser/core/Analyzer';
 import Events, { DamageEvent, GetRelatedEvents, HealEvent } from 'parser/core/Events';
 import { calculateEffectiveDamage, calculateEffectiveHealing } from 'parser/core/EventCalculateLib';
@@ -9,8 +8,6 @@ import ItemHealingDone from 'parser/ui/ItemHealingDone';
 import ItemDamageDone from 'parser/ui/ItemDamageDone';
 import STATISTIC_CATEGORY from 'parser/ui/STATISTIC_CATEGORY';
 import STATISTIC_ORDER from 'parser/ui/STATISTIC_ORDER';
-import StatisticListBoxItem from 'parser/ui/StatisticListBoxItem';
-import { formatPercentage } from 'common/format';
 import { AT_RSK } from '../../normalizers/EventLinks/EventLinkConstants';
 import { getCurrentRSKTalentDamage, YULONS_KNOWLEDGE_RSK_INCREASE } from '../../constants';
 
@@ -32,15 +29,6 @@ class YulonsKnowledge extends Analyzer {
     this.healing += GetRelatedEvents<HealEvent>(event, AT_RSK).reduce(
       (sum, heal) => sum + calculateEffectiveHealing(heal, YULONS_KNOWLEDGE_RSK_INCREASE),
       0,
-    );
-  }
-
-  subStatistic() {
-    return (
-      <StatisticListBoxItem
-        title={<SpellLink spell={TALENTS_MONK.YULONS_KNOWLEDGE_TALENT} />}
-        value={`${formatPercentage(this.owner.getPercentageOfTotalHealingDone(this.healing))} %`}
-      />
     );
   }
 

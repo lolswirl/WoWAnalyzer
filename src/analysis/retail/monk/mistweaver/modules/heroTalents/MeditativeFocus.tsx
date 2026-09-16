@@ -1,13 +1,10 @@
-import { formatPercentage } from 'common/format';
 import { TALENTS_MONK } from 'common/TALENTS';
-import { SpellLink } from 'interface';
 import Analyzer, { Options } from 'parser/core/Analyzer';
 import Statistic from 'parser/ui/Statistic';
 import TalentSpellText from 'parser/ui/TalentSpellText';
 import ItemHealingDone from 'parser/ui/ItemHealingDone';
 import STATISTIC_CATEGORY from 'parser/ui/STATISTIC_CATEGORY';
 import STATISTIC_ORDER from 'parser/ui/STATISTIC_ORDER';
-import StatisticListBoxItem from 'parser/ui/StatisticListBoxItem';
 import AncientTeachings from '../spells/AncientTeachings';
 
 class MeditativeFocus extends Analyzer.withDependencies({
@@ -20,15 +17,6 @@ class MeditativeFocus extends Analyzer.withDependencies({
 
   get healing() {
     return this.deps.ancientTeachings.meditativeFocusHealing;
-  }
-
-  subStatistic() {
-    return (
-      <StatisticListBoxItem
-        title={<SpellLink spell={TALENTS_MONK.MEDITATIVE_FOCUS_TALENT} />}
-        value={`${formatPercentage(this.owner.getPercentageOfTotalHealingDone(this.healing))} %`}
-      />
-    );
   }
 
   statistic() {
