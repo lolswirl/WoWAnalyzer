@@ -31,8 +31,6 @@ const overhealingPerfRange: QualitativePerformanceThresholdRange = {
 };
 
 class AspectOfHarmony extends AspectOfHarmonyBaseAnalyzer {
-  talent = TALENTS_MONK.ASPECT_OF_HARMONY_TALENT;
-
   getEntryFromCast(info: CastInfo): BoxRowEntry {
     const pctRaid = info.numBuffs / this.combatants.playerCount;
     const targetPerf = evaluateQualitativePerformanceByThreshold({
@@ -58,10 +56,6 @@ class AspectOfHarmony extends AspectOfHarmonyBaseAnalyzer {
       </>
     );
     return { value, tooltip };
-  }
-
-  get healing() {
-    return this.castEntries.reduce((sum, entry) => sum + entry.totalHealing, 0);
   }
 
   get guideSubsection(): JSX.Element {

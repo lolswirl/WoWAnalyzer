@@ -81,6 +81,7 @@ import CelestialConduitNormalizer from '../shared/hero/ConduitOfTheCelestials/no
 import CelestialConduit from '../shared/hero/ConduitOfTheCelestials/talents/CelestialConduit';
 import StrengthOfTheBlackOx from './modules/heroTalents/StrengthOfTheBlackOx';
 import Coalesence from '../shared/hero/MasterOfHarmony/talents/Coalesence';
+import HarmonicGambit from '../shared/hero/MasterOfHarmony/talents/HarmonicGambit';
 import AspectOfHarmony from './modules/heroTalents/AspectOfHarmony';
 import MeditativeFocus from './modules/heroTalents/MeditativeFocus';
 import YulonsKnowledge from './modules/heroTalents/YulonsKnowledge';
@@ -233,6 +234,7 @@ class CombatLogParser extends CoreCombatLogParser {
     apl: AplCheck,
     // Harmony
     coalesence: Coalesence,
+    harmonicGambit: HarmonicGambit,
 
     // Borrowed Power
     s1TierSet: S1TierSet,
