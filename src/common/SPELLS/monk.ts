@@ -185,6 +185,26 @@ const spells = {
     name: 'Celestial Conduit',
     icon: 'inv_ability_conduitofthecelestialsmonk_celestialconduit',
   },
+  INNER_COMPASS_CRANE_STANCE: {
+    id: 443572,
+    name: 'Crane Stance',
+    icon: 'monk_stance_redcrane',
+  },
+  INNER_COMPASS_OX_STANCE: {
+    id: 443574,
+    name: 'Ox Stance',
+    icon: 'monk_stance_drunkenox',
+  },
+  INNER_COMPASS_TIGER_STANCE: {
+    id: 443575,
+    name: 'Tiger Stance',
+    icon: 'monk_stance_whitetiger',
+  },
+  INNER_COMPASS_SERPENT_STANCE: {
+    id: 443576,
+    name: 'Serpent Stance',
+    icon: 'monk_stance_wiseserpent',
+  },
   UNITY_WITHIN_CAST: {
     id: 443591,
     name: 'Unity Within',
