@@ -114,6 +114,10 @@ class StrengthOfTheBlackOx extends Analyzer.withDependencies({
       this.onUnityWithin,
     );
     this.addEventListener(
+      Events.removebuff.to(SELECTED_PLAYER).spell(SPELLS.UNITY_WITHIN_CAST),
+      this.onUnityWithin,
+    );
+    this.addEventListener(
       Events.applybuff.by(SELECTED_PLAYER).spell(SPELLS.STRENGTH_OF_THE_BLACK_OX_SHIELD),
       this.onApplyShield,
     );
@@ -198,7 +202,7 @@ class StrengthOfTheBlackOx extends Analyzer.withDependencies({
     return timestamp - this.lastUnityTimestamp <= CAST_BUFFER_MS;
   }
 
-  private onUnityWithin(event: CastEvent | EndChannelEvent) {
+  private onUnityWithin(event: CastEvent | EndChannelEvent | RemoveBuffEvent) {
     this.lastUnityTimestamp = event.timestamp;
   }
 
@@ -256,8 +260,13 @@ class StrengthOfTheBlackOx extends Analyzer.withDependencies({
     }
   }
 
+  // stampede does not apply to unity within shields, only the consuming enveloping mist
   private classifyBatch() {
-    if (!this.hasStampede || this.pendingBatch.length < 2) {
+    if (
+      !this.hasStampede ||
+      this.pendingBatch.length < 2 ||
+      this.pendingBatch.some((shield) => shield.fromUnity)
+    ) {
       this.pendingBatch = [];
       return;
     }
