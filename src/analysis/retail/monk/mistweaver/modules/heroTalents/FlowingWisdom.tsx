@@ -48,7 +48,7 @@ class FlowingWisdom extends Analyzer.withDependencies({
       >
         <TalentSpellText talent={this.talent}>
           <div>
-            <HasteIcon /> {formatPercentage(this.averageHaste)}% <small>average haste</small>
+            <HasteIcon /> {formatPercentage(this.averageHaste)}% <small>average Haste</small>
           </div>
         </TalentSpellText>
       </Statistic>
