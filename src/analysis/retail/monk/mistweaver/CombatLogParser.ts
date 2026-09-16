@@ -52,6 +52,7 @@ import RapidDiffusion from './modules/spells/RapidDiffusion';
 import DancingMists from './modules/spells/DancingMists';
 import MistyPeaksHealingBreakdown from './modules/features/MistyPeaksHealingBreakdown';
 import TalentHealingStatistic from './modules/features/TalentHealingStatistic';
+import HeroTalentHealingStatistic from './modules/features/HeroTalentHealingStatistic';
 import SheilunsGift from './modules/spells/SheilunsGift';
 import MistWrap from './modules/spells/MistWrap';
 import LegacyOfWisdom from './modules/spells/LegacyOfWisdom';
@@ -83,6 +84,14 @@ import Coalesence from '../shared/hero/MasterOfHarmony/talents/Coalesence';
 import AspectOfHarmony from './modules/heroTalents/AspectOfHarmony';
 import MeditativeFocus from './modules/heroTalents/MeditativeFocus';
 import YulonsKnowledge from './modules/heroTalents/YulonsKnowledge';
+import StampedeOfTheAncients from './modules/heroTalents/StampedeOfTheAncients';
+import UnityWithin from './modules/heroTalents/UnityWithin';
+import TempleTraining from './modules/heroTalents/TempleTraining';
+import XuensGuidance from './modules/heroTalents/XuensGuidance';
+import NiuzaosProtection from './modules/heroTalents/NiuzaosProtection';
+import CourageOfTheWhiteTiger from './modules/heroTalents/CourageOfTheWhiteTiger';
+import FlowingWisdom from './modules/heroTalents/FlowingWisdom';
+import InnerCompass from '../shared/hero/ConduitOfTheCelestials/talents/InnerCompass';
 import RushingWindKick from './modules/spells/RushingWindKick';
 import JadeEmpowerment from './modules/spells/JadeEmpowerment';
 import MistyCoalescence from './modules/spells/MistyCoalescence';
@@ -147,6 +156,7 @@ class CombatLogParser extends CoreCombatLogParser {
     remGraph: REMGraph,
     hotCountGraph: HotCountGraph,
     talentHealingStatistic: TalentHealingStatistic,
+    heroTalentHealingStatistic: HeroTalentHealingStatistic,
     risingMistBreakdown: RisingMistBreakdown,
     movementTracker: MovementTracker,
     castingWhileMoving: CastingWhileMoving,
@@ -238,6 +248,14 @@ class CombatLogParser extends CoreCombatLogParser {
     aspectOfHarmony: AspectOfHarmony,
     meditativeFocus: MeditativeFocus,
     yulonsKnowledge: YulonsKnowledge,
+    stampedeOfTheAncients: StampedeOfTheAncients,
+    unityWithin: UnityWithin,
+    templeTraining: TempleTraining,
+    xuensGuidance: XuensGuidance,
+    niuzaosProtection: NiuzaosProtection,
+    courageOfTheWhiteTiger: CourageOfTheWhiteTiger,
+    flowingWisdom: FlowingWisdom,
+    innerCompass: InnerCompass,
 
     // Defensives
     fortifyingBrew: FortifyingBrew,
