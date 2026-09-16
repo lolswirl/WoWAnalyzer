@@ -10,9 +10,11 @@ import AncientTeachings from '../spells/AncientTeachings';
 class MeditativeFocus extends Analyzer.withDependencies({
   ancientTeachings: AncientTeachings,
 }) {
+  talent = TALENTS_MONK.MEDITATIVE_FOCUS_TALENT;
+
   constructor(options: Options) {
     super(options);
-    this.active = this.selectedCombatant.hasTalent(TALENTS_MONK.MEDITATIVE_FOCUS_TALENT);
+    this.active = this.selectedCombatant.hasTalent(this.talent);
   }
 
   get healing() {

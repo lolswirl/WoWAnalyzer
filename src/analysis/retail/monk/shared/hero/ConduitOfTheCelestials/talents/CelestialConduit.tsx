@@ -73,6 +73,10 @@ class CelestialConduit extends Analyzer {
 
   protected readonly currentSpell: Talent | undefined;
 
+  get talent(): Talent {
+    return this.currentSpell!;
+  }
+
   constructor(options: Options) {
     super(options);
     if (this.selectedCombatant.hasTalent(TALENTS_MONK.CELESTIAL_CONDUIT_MISTWEAVER_TALENT)) {

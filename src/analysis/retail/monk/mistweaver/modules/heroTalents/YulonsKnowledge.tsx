@@ -13,11 +13,12 @@ import { getCurrentRSKTalentDamage, YULONS_KNOWLEDGE_RSK_INCREASE } from '../../
 
 class YulonsKnowledge extends Analyzer {
   damage = 0;
+  talent = TALENTS_MONK.YULONS_KNOWLEDGE_TALENT;
   healing = 0;
 
   constructor(options: Options) {
     super(options);
-    this.active = this.selectedCombatant.hasTalent(TALENTS_MONK.YULONS_KNOWLEDGE_TALENT);
+    this.active = this.selectedCombatant.hasTalent(this.talent);
     this.addEventListener(
       Events.damage.by(SELECTED_PLAYER).spell(getCurrentRSKTalentDamage(this.selectedCombatant)),
       this.onDamage,

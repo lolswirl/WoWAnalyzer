@@ -23,12 +23,13 @@ class Coalesence extends Analyzer {
   protected combatants!: Combatants;
   protected enemies!: Enemies;
   totalDmg = 0;
-  totalHealing = 0;
+  talent = TALENTS_MONK.COALESCENCE_TALENT;
+  healing = 0;
 
   constructor(options: Options) {
     super(options);
 
-    this.active = this.selectedCombatant.hasTalent(TALENTS_MONK.COALESCENCE_TALENT);
+    this.active = this.selectedCombatant.hasTalent(this.talent);
     this.addEventListener(Events.heal.by(SELECTED_PLAYER), this.onHeal);
     this.addEventListener(Events.damage.by(SELECTED_PLAYER), this.onDamage);
   }
@@ -55,7 +56,7 @@ class Coalesence extends Analyzer {
     ) {
       return;
     }
-    this.totalHealing += calculateEffectiveHealing(event, COALESENCE_INCREASE);
+    this.healing += calculateEffectiveHealing(event, COALESENCE_INCREASE);
   }
 
   private onDamage(event: DamageEvent) {
@@ -87,7 +88,7 @@ class Coalesence extends Analyzer {
       >
         <TalentSpellText talent={TALENTS_MONK.COALESCENCE_TALENT}>
           <div>
-            <ItemHealingDone amount={this.totalHealing} />
+            <ItemHealingDone amount={this.healing} />
           </div>
           <div>
             <ItemDamageDone amount={this.totalDmg} />

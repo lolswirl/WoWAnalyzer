@@ -18,6 +18,7 @@ class RestoreBalance extends Analyzer {
   };
   protected celestialHooks!: CelestialHooks;
   casts = 0;
+  talent = TALENTS_MONK.RESTORE_BALANCE_TALENT;
   healing = 0;
   overheal = 0;
 
@@ -25,7 +26,7 @@ class RestoreBalance extends Analyzer {
 
   constructor(options: Options) {
     super(options);
-    this.active = this.selectedCombatant.hasTalent(TALENTS_MONK.RESTORE_BALANCE_TALENT);
+    this.active = this.selectedCombatant.hasTalent(this.talent);
     if (this.selectedCombatant.specId === SPECS.WINDWALKER_MONK.id) {
       this.addEventListener(Events.damage.by(SELECTED_PLAYER), this.onDamage);
     }
