@@ -8,7 +8,6 @@ import STATISTIC_CATEGORY from 'parser/ui/STATISTIC_CATEGORY';
 import { getHeroTalentStatisticPosition } from 'analysis/retail/monk/shared/hero/constants';
 import HeartOfTheJadeSerpent from '../spells/HeartOfTheJadeSerpent';
 import { FLOWING_WISDOM_HASTE } from '../../constants';
-import UptimeIcon from 'interface/icons/Uptime';
 import HasteIcon from 'interface/icons/Haste';
 
 class FlowingWisdom extends Analyzer.withDependencies({
@@ -48,9 +47,6 @@ class FlowingWisdom extends Analyzer.withDependencies({
         }
       >
         <TalentSpellText talent={this.talent}>
-          <div>
-            <UptimeIcon /> {formatPercentage(this.uptimePercent)}% <small>uptime</small>
-          </div>
           <div>
             <HasteIcon /> {formatPercentage(this.averageHaste)}% <small>average haste</small>
           </div>
