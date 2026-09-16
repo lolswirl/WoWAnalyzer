@@ -8,7 +8,6 @@ import Events, {
   AnyEvent,
   ApplyBuffEvent,
   CastEvent,
-  EndChannelEvent,
   HealEvent,
   RefreshBuffEvent,
   RemoveBuffEvent,
@@ -110,10 +109,6 @@ class StrengthOfTheBlackOx extends Analyzer.withDependencies({
       this.onUnityWithin,
     );
     this.addEventListener(
-      Events.EndChannel.by(SELECTED_PLAYER).spell(TALENTS_MONK.CELESTIAL_CONDUIT_MISTWEAVER_TALENT),
-      this.onUnityWithin,
-    );
-    this.addEventListener(
       Events.removebuff.to(SELECTED_PLAYER).spell(SPELLS.UNITY_WITHIN_CAST),
       this.onUnityWithin,
     );
@@ -202,7 +197,7 @@ class StrengthOfTheBlackOx extends Analyzer.withDependencies({
     return timestamp - this.lastUnityTimestamp <= CAST_BUFFER_MS;
   }
 
-  private onUnityWithin(event: CastEvent | EndChannelEvent | RemoveBuffEvent) {
+  private onUnityWithin(event: CastEvent | RemoveBuffEvent) {
     this.lastUnityTimestamp = event.timestamp;
   }
 
