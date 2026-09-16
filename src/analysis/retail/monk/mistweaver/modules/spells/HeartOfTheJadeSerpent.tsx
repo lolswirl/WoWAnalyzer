@@ -2,6 +2,7 @@ import BaseHotJS, {
   HEART_BUFFS,
 } from 'analysis/retail/monk/shared/hero/ConduitOfTheCelestials/talents/HeartOfTheJadeSerpent';
 import { MISTWEAVER_HEART_SPELLS } from 'analysis/retail/monk/shared/hero/ConduitOfTheCelestials/constants';
+import SPELLS from 'common/SPELLS';
 import { TALENTS_MONK } from 'common/TALENTS';
 import { formatDuration, formatPercentage } from 'common/format';
 import { maybeGetTalentOrSpell } from 'common/maybeGetTalentOrSpell';
@@ -32,9 +33,12 @@ class HeartOfTheJadeSerpent extends BaseHotJS {
   declare protected abilities: Abilities;
   declare protected spellUsable: SpellUsable;
 
+  talent = TALENTS_MONK.HEART_OF_THE_JADE_SERPENT_TALENT;
   private inWindow = false;
   private windowStart = 0;
   private windowExtraRate = 0;
+  private windowIsUnity = false;
+  private unityExtraCdrMs = new Map<number, number>();
   private activeSegments = new Map<number, number>();
   private totalExtraCdrMs = new Map<number, number>();
   private totalWastedCdrMs = new Map<number, number>();
@@ -67,6 +71,7 @@ class HeartOfTheJadeSerpent extends BaseHotJS {
     }
 
     this.windowExtraRate = this.rateChange(event.ability.guid);
+    this.windowIsUnity = event.ability.guid === SPELLS.HEART_OF_THE_JADE_SERPENT_UNITY.id;
     this.windowStart = event.timestamp;
     this.inWindow = true;
 
@@ -131,10 +136,25 @@ class HeartOfTheJadeSerpent extends BaseHotJS {
   private accumulate(spellId: number, durationMs: number) {
     const extra = durationMs * this.windowExtraRate;
     this.totalExtraCdrMs.set(spellId, (this.totalExtraCdrMs.get(spellId) ?? 0) + extra);
+    if (this.windowIsUnity) {
+      this.unityExtraCdrMs.set(spellId, (this.unityExtraCdrMs.get(spellId) ?? 0) + extra);
+    }
   }
 
-  private extraCasts(spellId: number): number {
-    const cdr = this.totalExtraCdrMs.get(spellId) ?? 0;
+  get uptime() {
+    return this.totalWindowUptimeMs;
+  }
+
+  // extra casts gained during unity within's window
+  get unityExtraCasts(): number {
+    return this.heartSpellIds.reduce(
+      (sum, id) => sum + this.extraCasts(id, this.unityExtraCdrMs),
+      0,
+    );
+  }
+
+  private extraCasts(spellId: number, cdrMap = this.totalExtraCdrMs): number {
+    const cdr = cdrMap.get(spellId) ?? 0;
     const ability = this.abilities.getAbility(spellId);
     const abilityCd = ability?.cooldown;
     // hasted cooldowns (like rsk, having a cooldown = fn()) use spellUsable
