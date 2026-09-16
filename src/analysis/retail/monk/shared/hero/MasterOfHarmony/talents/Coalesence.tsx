@@ -9,7 +9,7 @@ import { COALESENCE_INCREASE } from '../constants';
 import Enemies from 'parser/shared/modules/Enemies';
 import Statistic from 'parser/ui/Statistic';
 import STATISTIC_CATEGORY from 'parser/ui/STATISTIC_CATEGORY';
-import STATISTIC_ORDER from 'parser/ui/STATISTIC_ORDER';
+import { getHeroTalentStatisticPosition } from 'analysis/retail/monk/shared/hero/constants';
 import TalentSpellText from 'parser/ui/TalentSpellText';
 import ItemHealingDone from 'parser/ui/ItemHealingDone';
 import ItemDamageDone from 'parser/ui/ItemDamageDone';
@@ -82,7 +82,7 @@ class Coalesence extends Analyzer {
   statistic() {
     return (
       <Statistic
-        position={STATISTIC_ORDER.CORE(9)}
+        position={getHeroTalentStatisticPosition(this.talent)}
         size="flexible"
         category={STATISTIC_CATEGORY.HERO_TALENTS}
       >

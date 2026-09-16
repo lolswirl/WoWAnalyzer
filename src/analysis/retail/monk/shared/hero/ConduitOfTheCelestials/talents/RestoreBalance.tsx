@@ -1,7 +1,7 @@
 import { TALENTS_MONK } from 'common/TALENTS';
 import Analyzer, { Options, SELECTED_PLAYER } from 'parser/core/Analyzer';
 import Events, { DamageEvent, HealEvent } from 'parser/core/Events';
-import STATISTIC_ORDER from 'parser/ui/STATISTIC_ORDER';
+import { getHeroTalentStatisticPosition } from 'analysis/retail/monk/shared/hero/constants';
 import STATISTIC_CATEGORY from 'parser/ui/STATISTIC_CATEGORY';
 import ItemHealingDone from 'parser/ui/ItemHealingDone';
 import Statistic from 'parser/ui/Statistic';
@@ -50,7 +50,7 @@ class RestoreBalance extends Analyzer {
   statistic() {
     return (
       <Statistic
-        position={STATISTIC_ORDER.CORE(0)}
+        position={getHeroTalentStatisticPosition(this.talent)}
         category={STATISTIC_CATEGORY.HERO_TALENTS}
         size="flexible"
       >

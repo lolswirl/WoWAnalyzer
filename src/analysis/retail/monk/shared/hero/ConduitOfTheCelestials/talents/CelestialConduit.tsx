@@ -16,7 +16,7 @@ import Haste from 'parser/shared/modules/Haste';
 import ItemDamageDone from 'parser/ui/ItemDamageDone';
 import ItemHealingDone from 'parser/ui/ItemHealingDone';
 import STATISTIC_CATEGORY from 'parser/ui/STATISTIC_CATEGORY';
-import STATISTIC_ORDER from 'parser/ui/STATISTIC_ORDER';
+import { getHeroTalentStatisticPosition } from 'analysis/retail/monk/shared/hero/constants';
 import Statistic from 'parser/ui/Statistic';
 import TalentSpellText from 'parser/ui/TalentSpellText';
 import {
@@ -360,7 +360,7 @@ class CelestialConduit extends Analyzer {
       <Statistic
         category={STATISTIC_CATEGORY.HERO_TALENTS}
         size="flexible"
-        position={STATISTIC_ORDER.CORE(0)}
+        position={getHeroTalentStatisticPosition(this.talent)}
         tooltip={
           <ul>
             <li>Casts cancelled early: {this.cancelledCasts}</li>

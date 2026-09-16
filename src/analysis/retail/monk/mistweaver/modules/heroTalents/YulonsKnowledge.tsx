@@ -7,7 +7,7 @@ import TalentSpellText from 'parser/ui/TalentSpellText';
 import ItemHealingDone from 'parser/ui/ItemHealingDone';
 import ItemDamageDone from 'parser/ui/ItemDamageDone';
 import STATISTIC_CATEGORY from 'parser/ui/STATISTIC_CATEGORY';
-import STATISTIC_ORDER from 'parser/ui/STATISTIC_ORDER';
+import { getHeroTalentStatisticPosition } from 'analysis/retail/monk/shared/hero/constants';
 import { AT_RSK } from '../../normalizers/EventLinks/EventLinkConstants';
 import { getCurrentRSKTalentDamage, YULONS_KNOWLEDGE_RSK_INCREASE } from '../../constants';
 
@@ -36,7 +36,7 @@ class YulonsKnowledge extends Analyzer {
   statistic() {
     return (
       <Statistic
-        position={STATISTIC_ORDER.CORE(11)}
+        position={getHeroTalentStatisticPosition(this.talent)}
         size="flexible"
         category={STATISTIC_CATEGORY.HERO_TALENTS}
       >

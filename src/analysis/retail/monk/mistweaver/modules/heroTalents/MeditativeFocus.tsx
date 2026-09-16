@@ -4,7 +4,7 @@ import Statistic from 'parser/ui/Statistic';
 import TalentSpellText from 'parser/ui/TalentSpellText';
 import ItemHealingDone from 'parser/ui/ItemHealingDone';
 import STATISTIC_CATEGORY from 'parser/ui/STATISTIC_CATEGORY';
-import STATISTIC_ORDER from 'parser/ui/STATISTIC_ORDER';
+import { getHeroTalentStatisticPosition } from 'analysis/retail/monk/shared/hero/constants';
 import AncientTeachings from '../spells/AncientTeachings';
 
 class MeditativeFocus extends Analyzer.withDependencies({
@@ -24,7 +24,7 @@ class MeditativeFocus extends Analyzer.withDependencies({
   statistic() {
     return (
       <Statistic
-        position={STATISTIC_ORDER.CORE(11)}
+        position={getHeroTalentStatisticPosition(this.talent)}
         size="flexible"
         category={STATISTIC_CATEGORY.HERO_TALENTS}
       >
