@@ -9,7 +9,8 @@ import ItemDamageDone from 'parser/ui/ItemDamageDone';
 import STATISTIC_CATEGORY from 'parser/ui/STATISTIC_CATEGORY';
 import { getHeroTalentStatisticPosition } from 'analysis/retail/monk/shared/hero/constants';
 import { AT_RSK } from '../../normalizers/EventLinks/EventLinkConstants';
-import { getCurrentRSKTalentDamage, YULONS_KNOWLEDGE_RSK_INCREASE } from '../../constants';
+import { getCurrentRSKTalentDamage } from '../../constants';
+import { YULONS_KNOWLEDGE_RSK_INCREASE } from 'analysis/retail/monk/shared/hero/ConduitOfTheCelestials/constants';
 
 class YulonsKnowledge extends Analyzer {
   damage = 0;

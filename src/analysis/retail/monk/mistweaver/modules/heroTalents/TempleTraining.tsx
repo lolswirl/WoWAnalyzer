@@ -10,7 +10,7 @@ import TalentSpellText from 'parser/ui/TalentSpellText';
 import ItemHealingDone from 'parser/ui/ItemHealingDone';
 import STATISTIC_CATEGORY from 'parser/ui/STATISTIC_CATEGORY';
 import { getHeroTalentStatisticPosition } from 'analysis/retail/monk/shared/hero/constants';
-import { TEMPLE_TRAINING_INCREASE } from '../../constants';
+import { TEMPLE_TRAINING_INCREASE } from 'analysis/retail/monk/shared/hero/ConduitOfTheCelestials/constants';
 
 const AFFECTED_SPELLS = [
   TALENTS_MONK.ENVELOPING_MIST_TALENT,

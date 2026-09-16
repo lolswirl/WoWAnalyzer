@@ -28,11 +28,11 @@ import {
 } from '../../normalizers/EventLinks/EventLinkConstants';
 import { effectiveDamage } from 'parser/shared/modules/DamageValue';
 import { effectiveHealing } from 'parser/shared/modules/HealingValue';
+import { WAY_OF_THE_CRANE_TP_STRIKES } from '../../constants';
 import {
-  WAY_OF_THE_CRANE_TP_STRIKES,
   XUENS_GUIDANCE_REFUND_CHANCE,
   XUENS_GUIDANCE_TP_INCREASE,
-} from '../../constants';
+} from 'analysis/retail/monk/shared/hero/ConduitOfTheCelestials/constants';
 
 // refunded stacks land ~100ms after the consuming blackout kick
 const REFUND_WINDOW_MS = 250;

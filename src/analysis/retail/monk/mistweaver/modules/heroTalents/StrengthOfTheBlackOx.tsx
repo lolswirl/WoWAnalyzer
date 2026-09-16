@@ -27,8 +27,8 @@ import {
   ENVELOPING_MIST_INCREASE,
   getCurrentCelestialTalent,
   MISTWRAP_INCREASE,
-  STAMPEDE_OF_THE_ANCIENTS_INCREASE,
 } from '../../constants';
+import { STAMPEDE_OF_THE_ANCIENTS_INCREASE } from 'analysis/retail/monk/shared/hero/ConduitOfTheCelestials/constants';
 import { addEnhancedCastReason } from 'parser/core/EventMetaLib';
 import Statistic from 'parser/ui/Statistic';
 import TalentSpellText from 'parser/ui/TalentSpellText';

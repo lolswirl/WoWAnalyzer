@@ -7,7 +7,7 @@ import TalentSpellText from 'parser/ui/TalentSpellText';
 import STATISTIC_CATEGORY from 'parser/ui/STATISTIC_CATEGORY';
 import { getHeroTalentStatisticPosition } from 'analysis/retail/monk/shared/hero/constants';
 import HeartOfTheJadeSerpent from '../spells/HeartOfTheJadeSerpent';
-import { FLOWING_WISDOM_HASTE } from '../../constants';
+import { FLOWING_WISDOM_HASTE } from 'analysis/retail/monk/shared/hero/ConduitOfTheCelestials/constants';
 import HasteIcon from 'interface/icons/Haste';
 
 class FlowingWisdom extends Analyzer.withDependencies({
