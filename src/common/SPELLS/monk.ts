@@ -1132,6 +1132,16 @@ const spells = {
     name: 'Aspect of Harmony',
     icon: 'inv_enchant_essencenethersmall',
   },
+  COALESCENCE_DAMAGE: {
+    id: 1292919,
+    name: 'Coalescence',
+    icon: 'inv_ability_masterofharmonymonk_aspectofharmony',
+  },
+  COALESCENCE_HEAL: {
+    id: 1292922,
+    name: 'Coalescence',
+    icon: 'inv_ability_masterofharmonymonk_aspectofharmony',
+  },
   ASPECT_OF_HARMONY_HOT: {
     id: 450769,
     name: 'Aspect of Harmony',

@@ -1,8 +1,6 @@
 import { TALENTS_MONK } from 'common/TALENTS/monk';
 import { Talent } from 'common/TALENTS/types';
 
-export const COALESENCE_INCREASE = 0.2;
-
 // talent tree order, used to order statistics (position 0 is the hero talent summary)
 // top talent, each column from left to right, then capstone
 export const HARMONY_TALENT_ORDER: Talent[] = [
