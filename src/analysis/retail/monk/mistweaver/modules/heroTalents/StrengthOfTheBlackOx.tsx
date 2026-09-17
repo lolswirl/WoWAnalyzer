@@ -303,7 +303,7 @@ class StrengthOfTheBlackOx extends Analyzer.withDependencies({
   }
 
   private hasManaBuff(): boolean {
-    return this.selectedCombatant.hasBuff(SPELLS.INNERVATE) || this.deps.celestial.celestialActive;
+    return this.deps.celestial.celestialActive;
   }
 
   private onRemoveBuff(event: RemoveBuffEvent) {
