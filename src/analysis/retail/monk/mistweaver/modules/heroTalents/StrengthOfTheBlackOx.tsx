@@ -169,7 +169,9 @@ class StrengthOfTheBlackOx extends Analyzer.withDependencies({
     const hot = this.deps.hotTracker.getHot(event, TALENTS_MONK.ENVELOPING_MIST_TALENT.id);
     if (hot && this.deps.hotTracker.fromStrengthOfTheBlackOx(hot)) {
       const healing = (event.amount || 0) + (event.absorbed || 0);
-      this.addHealing(HealingSource.EnvelopingMist, healing);
+      if (!this.deps.celestial.celestialActive) {
+        this.addHealing(HealingSource.EnvelopingMist, healing);
+      }
       if (this.deps.hotTracker.fromMistyPeaks(hot)) {
         this.addHealing(HealingSource.MistyPeaks, healing);
       }
@@ -186,7 +188,9 @@ class StrengthOfTheBlackOx extends Analyzer.withDependencies({
     const hot = this.deps.hotTracker.getHot(event, TALENTS_MONK.ENVELOPING_MIST_TALENT.id);
     if (hot && this.deps.hotTracker.fromStrengthOfTheBlackOx(hot)) {
       const healing = calculateEffectiveHealing(event, this.evmHealingIncrease);
-      this.addHealing(HealingSource.EnvelopingMistBonus, healing);
+      if (!this.deps.celestial.celestialActive) {
+        this.addHealing(HealingSource.EnvelopingMistBonus, healing);
+      }
       if (this.deps.hotTracker.fromMistyPeaks(hot)) {
         this.addHealing(HealingSource.MistyPeaksBonus, healing);
       }
