@@ -92,7 +92,7 @@ class HeroTalentHealingStatistic extends Analyzer.withDependencies({
               </div>
               <div className="flex-sub text-right">
                 {module.healing === undefined ? (
-                  <TooltipElement content="This talent's contribution cannot be quantified as healing and is not included in the total.">
+                  <TooltipElement content="This talent's contribution cannot be fully quantified as healing and is not included in the total.">
                     <InformationIcon />
                   </TooltipElement>
                 ) : (
