@@ -170,8 +170,8 @@ class UnityWithin extends Analyzer.withDependencies({
             )}
             {this.missed('whiteTiger') > 0 && (
               <li>
-                <SpellLink spell={SPELLS.COURAGE_OF_THE_WHITE_TIGER_HEAL} /> did not fire:{' '}
-                {this.missed('whiteTiger')}
+                <SpellLink spell={SPELLS.COURAGE_OF_THE_WHITE_TIGER_HEAL} /> did not fire (likely
+                due to being out of range): {this.missed('whiteTiger')}
               </li>
             )}
             {this.missed('blackOx') > 0 && (
