@@ -54,16 +54,19 @@ class HeartOfTheJadeSerpent extends Analyzer {
       : WINDWALKER_HEART_SPELLS;
   }
 
+  // standard hotjs and yu'lon's avatar are multiplicative,
+  // while unity overrides any others active at the same time.
+  // rate is 1.75 * 1.75 = 3.0625, matching modRate ingame
+  protected combinedRateMultiplier(buffIds: Iterable<number>): number {
+    const active = Array.from(buffIds);
+    if (active.includes(SPELLS.HEART_OF_THE_JADE_SERPENT_UNITY.id)) {
+      return 1 + this.rateChange(SPELLS.HEART_OF_THE_JADE_SERPENT_UNITY.id);
+    }
+    return active.reduce((total, buffId) => total * (1 + this.rateChange(buffId)), 1);
+  }
+
   private syncRateChange(timestamp: number) {
-    const rate =
-      this.activeBuffs.size === 0
-        ? null
-        : 1 +
-          this.rateChange(
-            this.activeBuffs.has(SPELLS.HEART_OF_THE_JADE_SERPENT_UNITY.id)
-              ? SPELLS.HEART_OF_THE_JADE_SERPENT_UNITY.id
-              : SPELLS.HEART_OF_THE_JADE_SERPENT_BUFF.id,
-          );
+    const rate = this.activeBuffs.size === 0 ? null : this.combinedRateMultiplier(this.activeBuffs);
 
     if (rate === this.appliedRate) {
       return;
