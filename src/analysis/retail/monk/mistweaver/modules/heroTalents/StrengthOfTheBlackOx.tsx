@@ -7,6 +7,7 @@ import Events, {
   AbsorbedEvent,
   AnyEvent,
   ApplyBuffEvent,
+  CastEvent,
   HealEvent,
   RefreshBuffEvent,
   RemoveBuffEvent,
@@ -80,6 +81,10 @@ class StrengthOfTheBlackOx extends Analyzer.withDependencies({
   batchesWithoutBoost = 0;
   hasStampede = false;
   lastUnityTimestamp = Number.MIN_SAFE_INTEGER;
+  lastUnityOnFriendly = false;
+  lastUnityCastTimestamp = Number.MIN_SAFE_INTEGER;
+  unityBatchesWithTarget = 0;
+  unityBatchesWithoutTarget = 0;
   activeShields = new Map<number, ShieldInfo>();
   pendingBatch: ShieldInfo[] = [];
   pendingBatchTimestamp = 0;
@@ -102,6 +107,10 @@ class StrengthOfTheBlackOx extends Analyzer.withDependencies({
     this.addEventListener(
       Events.removebuff.to(SELECTED_PLAYER).spell(SPELLS.STRENGTH_OF_THE_BLACK_OX_BUFF),
       this.onRemoveBuff,
+    );
+    this.addEventListener(
+      Events.cast.by(SELECTED_PLAYER).spell(SPELLS.UNITY_WITHIN_CAST),
+      this.onUnityCast,
     );
     this.addEventListener(
       Events.removebuff.to(SELECTED_PLAYER).spell(SPELLS.UNITY_WITHIN_BUFF),
@@ -196,6 +205,21 @@ class StrengthOfTheBlackOx extends Analyzer.withDependencies({
     return timestamp - this.lastUnityTimestamp <= CAST_BUFFER_MS;
   }
 
+  // casting unity on a friendly gives it a primary target to boost, the boosted shield then lands
+  // on someone in the batch rather than on the cast target itself
+  // letting the buff expire instead fires unity with no cast and no target, so nothing is boosted -.-
+  private get unityHasPrimaryTarget(): boolean {
+    return (
+      this.lastUnityOnFriendly &&
+      Math.abs(this.lastUnityCastTimestamp - this.lastUnityTimestamp) <= CAST_BUFFER_MS
+    );
+  }
+
+  private onUnityCast(event: CastEvent) {
+    this.lastUnityOnFriendly = event.targetIsFriendly;
+    this.lastUnityCastTimestamp = event.timestamp;
+  }
+
   private onUnityWithin(event: RemoveBuffEvent) {
     this.lastUnityTimestamp = event.timestamp;
   }
@@ -254,12 +278,20 @@ class StrengthOfTheBlackOx extends Analyzer.withDependencies({
     }
   }
 
-  // stampede does not apply to unity within shields, only the consuming enveloping mist
+  // unity within only boosts a shield when it was cast on a friendly, otherwise it has no primary target
   private classifyBatch() {
+    const fromUnity = this.pendingBatch.some((shield) => shield.fromUnity);
+    if (fromUnity && this.hasStampede && this.pendingBatch.length >= 2) {
+      if (this.unityHasPrimaryTarget) {
+        this.unityBatchesWithTarget += 1;
+      } else {
+        this.unityBatchesWithoutTarget += 1;
+      }
+    }
     if (
       !this.hasStampede ||
       this.pendingBatch.length < 2 ||
-      this.pendingBatch.some((shield) => shield.fromUnity)
+      (fromUnity && !this.unityHasPrimaryTarget)
     ) {
       this.pendingBatch = [];
       return;

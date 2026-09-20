@@ -186,6 +186,25 @@ class UnityWithin extends Analyzer.withDependencies({
                 {this.missed('jadeSerpent')}
               </li>
             )}
+            {this.deps.strengthOfTheBlackOx.hasStampede && (
+              <li>
+                <SpellLink spell={TALENTS_MONK.STAMPEDE_OF_THE_ANCIENTS_TALENT} /> boosted a shield
+                on {this.deps.strengthOfTheBlackOx.unityBatchesWithTarget} of these casts
+                {this.deps.strengthOfTheBlackOx.unityBatchesWithoutTarget > 0 && (
+                  <ul>
+                    <li>
+                      {this.deps.strengthOfTheBlackOx.unityBatchesWithoutTarget} cast
+                      {this.deps.strengthOfTheBlackOx.unityBatchesWithoutTarget === 1
+                        ? ' was'
+                        : 's were'}{' '}
+                      not on a friendly target, so no shield was boosted. Casting{' '}
+                      <SpellLink spell={this.talent} /> on an ally gives it a primary target, though
+                      the boosted shield can still land on someone else.
+                    </li>
+                  </ul>
+                )}
+              </li>
+            )}
           </ul>
         }
       >
