@@ -22,6 +22,8 @@ class HeartOfTheJadeSerpent extends Analyzer {
   protected spellUsable!: SpellUsable;
 
   isMW = true;
+  private activeBuffs = new Set<number>();
+  private appliedRate: number | null = null;
 
   constructor(options: Options) {
     super(options);
@@ -44,40 +46,45 @@ class HeartOfTheJadeSerpent extends Analyzer {
     return (unity ? 2 : 1) * HEART_COOLDOWN_RATE;
   }
 
-  private onApplyBuff(event: ApplyBuffEvent) {
-    const rateChange = 1 + this.rateChange(event.ability.guid);
-
-    this.isMW
-      ? this.spellUsable.applyCooldownRateChange(
-          MISTWEAVER_HEART_SPELLS(
-            this.selectedCombatant.hasTalent(TALENTS_MONK.RUSHING_WIND_KICK_MISTWEAVER_TALENT),
-          ),
-          rateChange,
-          event.timestamp,
+  private get heartSpells(): number[] {
+    return this.isMW
+      ? MISTWEAVER_HEART_SPELLS(
+          this.selectedCombatant.hasTalent(TALENTS_MONK.RUSHING_WIND_KICK_MISTWEAVER_TALENT),
         )
-      : this.spellUsable.applyCooldownRateChange(
-          WINDWALKER_HEART_SPELLS,
-          rateChange,
-          event.timestamp,
-        );
+      : WINDWALKER_HEART_SPELLS;
+  }
+
+  private syncRateChange(timestamp: number) {
+    const rate =
+      this.activeBuffs.size === 0
+        ? null
+        : 1 +
+          this.rateChange(
+            this.activeBuffs.has(SPELLS.HEART_OF_THE_JADE_SERPENT_UNITY.id)
+              ? SPELLS.HEART_OF_THE_JADE_SERPENT_UNITY.id
+              : SPELLS.HEART_OF_THE_JADE_SERPENT_BUFF.id,
+          );
+
+    if (rate === this.appliedRate) {
+      return;
+    }
+    if (this.appliedRate !== null) {
+      this.spellUsable.removeCooldownRateChange(this.heartSpells, this.appliedRate, timestamp);
+    }
+    if (rate !== null) {
+      this.spellUsable.applyCooldownRateChange(this.heartSpells, rate, timestamp);
+    }
+    this.appliedRate = rate;
+  }
+
+  private onApplyBuff(event: ApplyBuffEvent) {
+    this.activeBuffs.add(event.ability.guid);
+    this.syncRateChange(event.timestamp);
   }
 
   private onRemoveBuff(event: RemoveBuffEvent) {
-    const rateChange = 1 + this.rateChange(event.ability.guid);
-
-    this.isMW
-      ? this.spellUsable.removeCooldownRateChange(
-          MISTWEAVER_HEART_SPELLS(
-            this.selectedCombatant.hasTalent(TALENTS_MONK.RUSHING_WIND_KICK_MISTWEAVER_TALENT),
-          ),
-          rateChange,
-          event.timestamp,
-        )
-      : this.spellUsable.removeCooldownRateChange(
-          WINDWALKER_HEART_SPELLS,
-          rateChange,
-          event.timestamp,
-        );
+    this.activeBuffs.delete(event.ability.guid);
+    this.syncRateChange(event.timestamp);
   }
 }
 
