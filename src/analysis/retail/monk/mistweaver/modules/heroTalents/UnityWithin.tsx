@@ -212,17 +212,10 @@ class UnityWithin extends Analyzer.withDependencies({
           {this.deps.heartOfTheJadeSerpent.active && (
             <div>
               <SpellIcon spell={TALENTS_MONK.HEART_OF_THE_JADE_SERPENT_TALENT} />{' '}
-              <TooltipElement
-                content={
-                  <>
-                    Extra casts gained from{' '}
-                    <SpellLink spell={TALENTS_MONK.HEART_OF_THE_JADE_SERPENT_TALENT} /> at 200% rate
-                  </>
-                }
-              >
+              <>
                 ≈ {this.deps.heartOfTheJadeSerpent.unityExtraCasts.toFixed(1)}{' '}
                 <small>extra casts</small>
-              </TooltipElement>
+              </>
             </div>
           )}
           <div>
