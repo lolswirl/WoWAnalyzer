@@ -22,6 +22,7 @@ import CourageOfTheWhiteTiger from '../heroTalents/CourageOfTheWhiteTiger';
 import HeartOfTheJadeSerpent from '../spells/HeartOfTheJadeSerpent';
 import FlowingWisdom from '../heroTalents/FlowingWisdom';
 import InnerCompass from 'analysis/retail/monk/shared/hero/ConduitOfTheCelestials/talents/InnerCompass';
+import PathOfTheFallingStar from 'analysis/retail/monk/shared/hero/ConduitOfTheCelestials/talents/PathOfTheFallingStar';
 import { TooltipElement } from 'interface/Tooltip';
 import InformationIcon from 'interface/icons/Information';
 
@@ -46,6 +47,7 @@ class HeroTalentHealingStatistic extends Analyzer.withDependencies({
   heartOfTheJadeSerpent: HeartOfTheJadeSerpent,
   flowingWisdom: FlowingWisdom,
   innerCompass: InnerCompass,
+  pathOfTheFallingStar: PathOfTheFallingStar,
   coalesence: Coalesence,
   aspectOfHarmony: AspectOfHarmony,
   meditativeFocus: MeditativeFocus,

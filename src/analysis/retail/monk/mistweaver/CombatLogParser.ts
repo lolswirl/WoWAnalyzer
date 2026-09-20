@@ -93,6 +93,7 @@ import NiuzaosProtection from './modules/heroTalents/NiuzaosProtection';
 import CourageOfTheWhiteTiger from './modules/heroTalents/CourageOfTheWhiteTiger';
 import FlowingWisdom from './modules/heroTalents/FlowingWisdom';
 import InnerCompass from '../shared/hero/ConduitOfTheCelestials/talents/InnerCompass';
+import PathOfTheFallingStar from '../shared/hero/ConduitOfTheCelestials/talents/PathOfTheFallingStar';
 import RushingWindKick from './modules/spells/RushingWindKick';
 import JadeEmpowerment from './modules/spells/JadeEmpowerment';
 import MistyCoalescence from './modules/spells/MistyCoalescence';
@@ -258,6 +259,7 @@ class CombatLogParser extends CoreCombatLogParser {
     courageOfTheWhiteTiger: CourageOfTheWhiteTiger,
     flowingWisdom: FlowingWisdom,
     innerCompass: InnerCompass,
+    pathOfTheFallingStar: PathOfTheFallingStar,
 
     // Defensives
     fortifyingBrew: FortifyingBrew,
