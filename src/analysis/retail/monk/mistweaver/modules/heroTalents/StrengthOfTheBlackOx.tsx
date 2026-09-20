@@ -7,7 +7,6 @@ import Events, {
   AbsorbedEvent,
   AnyEvent,
   ApplyBuffEvent,
-  CastEvent,
   HealEvent,
   RefreshBuffEvent,
   RemoveBuffEvent,
@@ -105,11 +104,7 @@ class StrengthOfTheBlackOx extends Analyzer.withDependencies({
       this.onRemoveBuff,
     );
     this.addEventListener(
-      Events.cast.by(SELECTED_PLAYER).spell(SPELLS.UNITY_WITHIN_CAST),
-      this.onUnityWithin,
-    );
-    this.addEventListener(
-      Events.removebuff.to(SELECTED_PLAYER).spell(SPELLS.UNITY_WITHIN_CAST),
+      Events.removebuff.to(SELECTED_PLAYER).spell(SPELLS.UNITY_WITHIN_BUFF),
       this.onUnityWithin,
     );
     this.addEventListener(
@@ -201,7 +196,7 @@ class StrengthOfTheBlackOx extends Analyzer.withDependencies({
     return timestamp - this.lastUnityTimestamp <= CAST_BUFFER_MS;
   }
 
-  private onUnityWithin(event: CastEvent | RemoveBuffEvent) {
+  private onUnityWithin(event: RemoveBuffEvent) {
     this.lastUnityTimestamp = event.timestamp;
   }
 

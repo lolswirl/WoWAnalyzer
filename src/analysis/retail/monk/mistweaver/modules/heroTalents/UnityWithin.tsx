@@ -3,7 +3,6 @@ import { TALENTS_MONK } from 'common/TALENTS';
 import Analyzer, { Options, SELECTED_PLAYER } from 'parser/core/Analyzer';
 import Events, {
   ApplyBuffEvent,
-  CastEvent,
   DamageEvent,
   HealEvent,
   RefreshBuffEvent,
@@ -23,7 +22,7 @@ import HeartOfTheJadeSerpent from '../spells/HeartOfTheJadeSerpent';
 
 // the tiger has travel time and hits more than once, landing 2-3s after the unity within trigger
 const UNITY_COURAGE_WINDOW_MS = 3000;
-// the cast and buff removal both fire for the same unity within
+// the buff fade and the heart buff can both open the same unity within
 const UNITY_DEDUPE_MS = 500;
 
 interface UnityCast {
@@ -48,11 +47,7 @@ class UnityWithin extends Analyzer.withDependencies({
     super(options);
     this.active = this.selectedCombatant.hasTalent(this.talent);
     this.addEventListener(
-      Events.cast.by(SELECTED_PLAYER).spell(SPELLS.UNITY_WITHIN_CAST),
-      this.onUnityWithin,
-    );
-    this.addEventListener(
-      Events.removebuff.to(SELECTED_PLAYER).spell(SPELLS.UNITY_WITHIN_CAST),
+      Events.removebuff.to(SELECTED_PLAYER).spell(SPELLS.UNITY_WITHIN_BUFF),
       this.onUnityWithin,
     );
     this.addEventListener(
@@ -81,11 +76,11 @@ class UnityWithin extends Analyzer.withDependencies({
     );
   }
 
-  onUnityWithin(event: CastEvent | RemoveBuffEvent) {
+  onUnityWithin(event: RemoveBuffEvent) {
     this.openCast(event.timestamp);
   }
 
-  // the cast, buff removal, and heart buff can all land on the same timestamp in any order
+  // the buff removal and heart buff can land on the same timestamp in any order
   private openCast(timestamp: number): UnityCast {
     if (timestamp - this.lastUnityTimestamp > UNITY_DEDUPE_MS) {
       this.casts.push({ redCrane: false, whiteTiger: false, blackOx: false, jadeSerpent: false });
@@ -133,7 +128,7 @@ class UnityWithin extends Analyzer.withDependencies({
     }
   }
 
-  // the unity heart buff is logged just before the unity cast on the same timestamp
+  // the unity heart buff is logged just before the unity fade on the same timestamp
   onJadeSerpent(event: ApplyBuffEvent) {
     this.openCast(event.timestamp).jadeSerpent = true;
   }

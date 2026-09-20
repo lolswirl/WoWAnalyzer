@@ -210,6 +210,11 @@ const spells = {
     name: 'Unity Within',
     icon: 'ability_monk_prideofthetiger',
   },
+  UNITY_WITHIN_BUFF: {
+    id: 443592,
+    name: 'Unity Within',
+    icon: 'ability_monk_prideofthetiger',
+  },
   MANTRA_OF_PURITY_STAGGER_ABSORB: {
     id: 451253,
     name: 'Mantra of Purity',
